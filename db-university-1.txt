@@ -1,0 +1,82 @@
+ESERCIZI SU GROUP 
+
+ESERCIZIO 1 
+
+SELECT COUNT(*) AS `n_iscritti`, YEAR(`enrolment_date`) AS `anno`
+FROM `students`
+GROUP BY YEAR(`enrolment_date`)
+
+ESERCIZIO 2 
+
+SELECT COUNT(*) AS `n_insegnanti_stesso_indirizzo`, `office_address` 
+FROM `teachers`
+GROUP BY `office_address`
+
+ESERCIZIO 3 
+
+SELECT COUNT(*) AS `n_partecipanti_esame`, `exam_id`, AVG(`vote`) AS `media_voto`
+FROM `exam_student`
+GROUP BY `exam_id`
+
+SELECT COUNT(*) AS `n_partecipanti_esame`, `exam_id`, ROUND(AVG(`vote`), 2) AS `media_voto`
+FROM `exam_student`
+GROUP BY `exam_id
+
+ESERCIZIO 4 
+
+SELECT COUNT(*), `department_id`
+FROM `degrees`
+GROUP BY `department_id`; 
+
+ESERCIZI SU JOIN 
+
+ESERCIZIO 1 
+
+SELECT `s`.`id`, `s`.`name`,`s`.`surname`, `d`.`name` 
+FROM `students` AS `s`
+JOIN `degrees` AS `d`
+ON `s`.`degree_id` = `d`.`id`
+WHERE `d`.`name` = 'Corso di Laurea in Economia'
+
+ESERCIZIO 2 
+
+SELECT `deg`.`name`, `deg`.`level`, `dep`.`name`,`dep`.`email` 
+FROM `degrees` AS `deg`
+JOIN `departments` `dep`
+ON `deg`.`department_id` = `dep`.`id`
+WHERE `deg`.`level` = 'magistrale' AND `dep`.`name` = 'Dipartimento di Neuroscienze'
+
+ESERCIZIO 3 
+
+SELECT `t`.`id`, `t`.`name`, `t`.`surname`, `c`.`name`, `c`.`period`, `c`.`year` 
+FROM `teachers` AS `t`
+JOIN `course_teacher` AS `ct`
+ON `t`.`id` = `ct`.`teacher_id`
+JOIN `courses` AS `c`
+ON `c`.`id` = `ct`.`course_id`
+WHERE `t`.`id` = '44'
+ORDER BY `c`.`year`
+
+ESERCIZIO 4 
+
+SELECT  `s`.`name`, `s`.`surname`, `deg`.`name`, `deg`.`level`, `dep`.`name`
+FROM `students` AS `s`
+JOIN `degrees` AS `deg`
+ON `s`.`degree_id` = `deg`.`id`
+JOIN `departments` AS `dep`
+ON `deg`.`department_id` = `dep`.`id`
+ORDER BY `s`.`name`, `s`.`surname`
+
+ESERCIZIO 5 
+
+SELECT `t`.`name`, `t`.`surname`, `deg`.`name`, `deg`.`level`, `c`.`name`, `c`.`description`, `c`.`period`	 
+FROM `degrees` AS `deg`
+JOIN `courses` AS `c`
+ON `deg`.`id` = `c`.`degree_id`
+JOIN `course_teacher` AS `ct` 
+ON `ct`.`course_id` = `c`.`id` 
+JOIN `teachers` AS `t` 
+ON `t`.`id` = `ct`.`teacher_id` 
+
+ESERCIZIO 6 
+
