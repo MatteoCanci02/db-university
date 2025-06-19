@@ -80,3 +80,19 @@ ON `t`.`id` = `ct`.`teacher_id`
 
 ESERCIZIO 6 
 
+SELECT `t`.`name`, `t`.`surname`, `deg`.`name`, `c`.`name`,  `c`.`period`, `dep`.`name` 	 
+FROM `degrees` AS `deg`
+JOIN `courses` AS `c`
+ON `deg`.`id` = `c`.`degree_id`
+JOIN `course_teacher` AS `ct` 
+ON `ct`.`course_id` = `c`.`id` 
+JOIN `teachers` AS `t` 
+ON `t`.`id` = `ct`.`teacher_id` 
+JOIN `departments` AS `dep`
+ON `dep`.`id` = `deg`.`department_id` 
+WHERE `dep`.`name` = 'Dipartimento di Matematica'
+ORDER BY `t`.`name`, `t`.`surname`
+
+
+
+
